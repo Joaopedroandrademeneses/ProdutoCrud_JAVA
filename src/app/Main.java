@@ -1,11 +1,85 @@
 package app;
 
+import model.Produto;
+import repository.ProdutoRepository;
+import repository.ProdutoRepositoryMemory;
+
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Hello and welcome!");
+        ProdutoRepository repo = new ProdutoRepositoryMemory();
+        Scanner input = new Scanner(System.in);
+        boolean ativo = true;
+        while (ativo) {
+            System.out.println("===Cadastrar produto=== 1 ");
+            System.out.println("===Sair=== 0 ");
+            System.out.println("Digite o numero da opcao desejada");
+            int opcao = input.nextInt();
+            input.nextLine();
+            switch (opcao) {
+                case 1: {
+                    System.out.println("Digite o nome do produto!");
+                    String nome = input.nextLine();
 
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
+                    boolean verificadorCategoria = false;
+                    String categoria = "";
+
+                    while (verificadorCategoria == false) {
+                        System.out.println("\nEscolha a categoria que mais se encaixa:");
+                        System.out.println("====================");
+                        System.out.println("---Alimenticio--- 1");
+                        System.out.println("---Eletronico--- 2");
+                        System.out.println("---Limpeza--- 3");
+                        int opcaoCategoria = input.nextInt();
+                        input.nextLine();
+
+                        switch (opcaoCategoria) {
+                            case 1: {
+                                categoria = "Alimenticio";
+                                verificadorCategoria = true;
+                                break;
+                            }
+                            case 2: {
+                                categoria = "Eletronico";
+                                verificadorCategoria = true;
+                                break;
+                            }
+                            case 3: {
+                                categoria = "Limpeza";
+                                verificadorCategoria = true;
+                                break;
+                            }
+                            default: {
+                                System.out.println("Item não aceito");
+                                break;
+                            }
+                        }
+                    }
+
+                    System.out.println("Digite o presso!");
+                    double preco = input.nextDouble();
+
+                    System.out.println("Digite a quantidade");
+                    int quantidade = input.nextInt();
+                    input.nextLine();
+                    Produto newprod = new Produto(nome, categoria, preco, quantidade);
+                    try {
+                        repo.salvarProduto(newprod);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                }
+                case 0: {
+                    ativo = false;
+                    break;
+                }
+                default:{
+                    System.out.println("Opcao invalida");
+                }
+            }
+
         }
     }
 }

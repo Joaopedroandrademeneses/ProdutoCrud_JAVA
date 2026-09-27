@@ -17,6 +17,9 @@ public class Produto {
         cont++;
     }
 
+    public Produto() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -26,7 +29,7 @@ public class Produto {
     }
 
     public void setNome(String nome) throws Exception {
-        if (nome == null || nome == " ") {
+        if (nome == null || nome.isBlank()) {
             throw new Exception("Nome do produto não pode ser vazio!!!");
         } else {
             this.nome = nome;
@@ -61,6 +64,8 @@ public class Produto {
     public void setQuantidade(Integer quantidade) throws Exception {
         if (quantidade <= 0) {
             throw new Exception("Quantidade não pode ser menor que 0");
+        }else {
+            this.quantidade=quantidade;
         }
     }
 
