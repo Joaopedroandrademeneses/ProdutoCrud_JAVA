@@ -9,12 +9,13 @@ public class Produto {
     private static int cont = 0;
 
     public Produto(String nome, String categoria, double preco, Integer quantidade) {
-        this.id = cont;
+        cont+=1;
+        this.id=cont;
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;
         this.quantidade = quantidade;
-        cont++;
+
     }
 
     public Produto() {
@@ -22,6 +23,10 @@ public class Produto {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id=id;
     }
 
     public String getNome() {
@@ -64,18 +69,20 @@ public class Produto {
     public void setQuantidade(Integer quantidade) throws Exception {
         if (quantidade <= 0) {
             throw new Exception("Quantidade não pode ser menor que 0");
-        }else {
-            this.quantidade=quantidade;
+        } else {
+            this.quantidade = quantidade;
         }
     }
 
-//Metodo de controle para facilitar a impressao utilizando o toString()
+    //Metodo de controle para facilitar a impressao utilizando o toString()
     @Override
     public String toString() {
         return "ID: " + id +
                 " | Nome: " + nome +
                 " | Categoria: " + categoria +
                 " | Preco: R$" + preco +
-                " | Quantidade: " + quantidade;
+                " | Quantidade: " + quantidade +
+                "\n";
+
     }
 }

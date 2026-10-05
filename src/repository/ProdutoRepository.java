@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProdutoRepository {
     void salvarProduto(Produto produto) throws Exception;
-    //List<Produto> listarTodos();
-    //Produto buscarPorId(Integer id);
+    List<Produto> listarTodos()throws Exception;
+    Produto buscarPorId(Integer id) throws Exception;
     //void atualizar(Produto produto);
     //void deletar(Integer id);
     //void adicionarEstoque(Integer id, Integer quantidade);
